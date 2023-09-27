@@ -6,3 +6,6 @@ Nesse repositório se encontram meus projetos pyhton que fiz para fins de aprend
   - Gerador de Frases
   - Simulador de Dado
   - YT Downloader
+* Dificuldade Média
+   - Gerenciador de Senhas
+   - Mario Party
