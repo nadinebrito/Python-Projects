@@ -40,12 +40,16 @@ plt.scatter(x[0] - 0.4, y[0] - 0.1 , c=lista_de_cores[3],s=50, marker="o")
 plt.savefig('CaminhoOriginal.png')
 
 # Setando o estado inicial do jogo
-chegada = False
+#chegada = False
+
 
 # Determinar vencedor
 def fimDeJogo(x, y):
-    if (x and y == -1):
-        chegada = True
+    if (x and y == 4):
+        #chegada = True
+        return True
+    else:
+        return False
 
 # Crie a o dado
 tamanho_dado = 6        
@@ -55,21 +59,30 @@ def jogada(pers, cor, cont):
     dado = random.randint(1,tamanho_dado)
     
     plt.scatter(x[dado], y[dado], c=cor,s=50, marker="o")
-    fimDeJogo(x[dado], y[dado])
+    
     plt.title('{a}ª jogada: {b} jogou o dado e sorteou: {c}'.format(a=cont, b=pers, c=dado))
     plt.savefig('{a}ª jogada'.format(a=cont))
+
+    test111 = fimDeJogo(x[dado], y[dado])
+
+    print ('dado:', x[dado], y[dado])
+    print('retorno da função fim de jogo:',test111)
+    print ('variavel chegada:', test111)
+    return test111
     
 # Ordem das Jogadas
 def ordemDeJogada(personagem, cor):
     cont = 1
-    while True:
-        if chegada == False:
-            for a,b in zip(personagem, cor):
-                jogada(a,b,cont)
+    game = True
+    while game:
+        for a,b in zip(personagem, cor):
+            chegada = jogada(a,b,cont)
+            if chegada == False:
                 cont+=1
-        else:
-            print("Fim de Jogo")
-            break
-     
+            else:
+                print("Fim de Jogo") 
+                game = False 
+            
+    
 
 ordemDeJogada(lista_de_personagens, lista_de_cores)
