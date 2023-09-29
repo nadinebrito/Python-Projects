@@ -10,8 +10,6 @@ print ('Mario Party em Python')
 
 # Personagens: Mario, Luigi, Bowser, Peach, Daisy
 lista_de_personagens = ['Mario', 'Diddy Kong', 'Waluigi', 'Boom Boom' ]
-print ('Personagens:', lista_de_personagens)
-
 
 # Crie um caminho
 x = [1,1,2,3,4,4,4,5,6,6,6]
@@ -44,29 +42,23 @@ plt.savefig('CaminhoOriginal.png')
 # Crie a o dado
 tamanho_dado = 6
 
-# Comece o jogo com o Mario
-dado_mario = random.randint(1,tamanho_dado)
-plt.scatter(x[dado_mario], y[dado_mario], c=lista_de_cores[0],s=50, marker="o")
-plt.title('Primeira jogada do Mario, dado sorteou: ' + str(dado_mario))
-plt.savefig('Primeira jogada do Mário')
-
-# Continue o jogo com o Diddy Kong
-dado_diddy = random.randint(1,tamanho_dado)
-plt.scatter(x[dado_diddy], y[dado_diddy], c=lista_de_cores[1],s=50, marker="o")
-plt.title('Primeira jogada do Diddy Kong, dado sorteou: ' + str(dado_diddy))
-plt.savefig('Primeira jogada do Diddy Kong')
-
-# Continue o jogo com o Waluigi
-dado_waluigi = random.randint(1,tamanho_dado)
-plt.scatter(x[dado_waluigi], y[dado_waluigi], c=lista_de_cores[2],s=50, marker="o")
-plt.title('Primeira jogada do Waluigi, dado sorteou: ' + str(dado_waluigi))
-plt.savefig('Primeira jogada do Waluigi')
-
-# Continue o jogo com o Boom Boom
-dado_boom = random.randint(1,tamanho_dado)
-plt.scatter(x[dado_boom], y[dado_boom], c=lista_de_cores[3],s=50, marker="o")
-plt.title('Primeira jogada do Boom Boom, dado sorteou: ' + str(dado_boom))
-plt.savefig('Primeira jogada do Boom Boom')
-
-
 # Determinar vencedores
+
+# JOGADA INDIVIDUAL
+
+def jogada(pers, cor, cont):
+    dado = random.randint(1,tamanho_dado)
+    
+    plt.scatter(x[dado], y[dado], c=cor,s=50, marker="o")
+    plt.title('{a}ª jogada: {b} jogou o dado e sorteou: {c}'.format(a=cont, b=pers, c=dado))
+    plt.savefig('{a}ª jogada'.format(a=cont))
+    
+
+def ordemDeJogada(personagem, cor):
+    cont = 1
+    for a,b in zip(personagem, cor):
+        jogada(a,b,cont)
+        cont+=1
+     
+
+ordemDeJogada(lista_de_personagens, lista_de_cores)
