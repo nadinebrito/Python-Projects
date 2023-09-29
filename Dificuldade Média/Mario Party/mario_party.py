@@ -39,26 +39,37 @@ plt.scatter(x[0] - 0.4, y[0] - 0.1 , c=lista_de_cores[3],s=50, marker="o")
 # Plotando o mapa
 plt.savefig('CaminhoOriginal.png')
 
+# Setando o estado inicial do jogo
+chegada = False
+
+# Determinar vencedor
+def fimDeJogo(x, y):
+    if (x and y == -1):
+        chegada = True
+
 # Crie a o dado
-tamanho_dado = 6
+tamanho_dado = 6        
 
-# Determinar vencedores
-
-# JOGADA INDIVIDUAL
-
+# Jogada Individual
 def jogada(pers, cor, cont):
     dado = random.randint(1,tamanho_dado)
     
     plt.scatter(x[dado], y[dado], c=cor,s=50, marker="o")
+    fimDeJogo(x[dado], y[dado])
     plt.title('{a}ª jogada: {b} jogou o dado e sorteou: {c}'.format(a=cont, b=pers, c=dado))
     plt.savefig('{a}ª jogada'.format(a=cont))
     
-
+# Ordem das Jogadas
 def ordemDeJogada(personagem, cor):
     cont = 1
-    for a,b in zip(personagem, cor):
-        jogada(a,b,cont)
-        cont+=1
+    while True:
+        if chegada == False:
+            for a,b in zip(personagem, cor):
+                jogada(a,b,cont)
+                cont+=1
+        else:
+            print("Fim de Jogo")
+            break
      
 
 ordemDeJogada(lista_de_personagens, lista_de_cores)
