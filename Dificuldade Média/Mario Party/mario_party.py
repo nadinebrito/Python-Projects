@@ -8,7 +8,7 @@ import random
 # Instructions
 print ('Mario Party em Python')
 
-# Personagens: Mario, Luigi, Bowser, Peach, Daisy
+# Personagens
 lista_de_personagens = ['Mario', 'Diddy Kong', 'Waluigi', 'Boom Boom' ]
 
 # Crie um caminho
