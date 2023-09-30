@@ -11,6 +11,8 @@ print ('Mario Party em Python')
 # Personagens
 lista_de_personagens = ['Mario', 'Diddy Kong', 'Waluigi', 'Boom Boom' ]
 
+lista_de_pontos = [0, 0, 0, 0]
+
 # Crie um caminho
 x = [1,1,2,3,4,4,4,5,6,6,6]
 y = [1,2,2,2,2,3,4,4,4,5,6]
@@ -39,14 +41,9 @@ plt.scatter(x[0] - 0.4, y[0] - 0.1 , c=lista_de_cores[3],s=50, marker="o")
 # Plotando o mapa
 plt.savefig('CaminhoOriginal.png')
 
-# Setando o estado inicial do jogo
-#chegada = False
-
-
 # Determinar vencedor
-def fimDeJogo(x, y):
-    if (x and y == 4):
-        #chegada = True
+def fimDeJogo(pts):
+    if (pts == 10):
         return True
     else:
         return False
@@ -55,34 +52,61 @@ def fimDeJogo(x, y):
 tamanho_dado = 6        
 
 # Jogada Individual
-def jogada(pers, cor, cont):
+def jogada(pers, cor,pontos, cont):
+
     dado = random.randint(1,tamanho_dado)
+
     
-    plt.scatter(x[dado], y[dado], c=cor,s=50, marker="o")
+    if (pers=='Mario'):
+        pts = pontos[0]
+        pts = pts + dado
+        pontos[0] = pts
+        print('mario',pts)
+
+    if (pers=='Diddy Kong'):
+        pts = pontos[1]
+        pts = pts + dado
+        pontos[1] = pts
+        print('Diddy',pts)
+
+    if (pers=='Waluigi'):
+        pts = pontos[2]
+        pts = pts + dado
+        pontos[2] = pts
+        print('Waluigi',pts)
+
+    if (pers=='Boom Boom'):
+        pts = pontos[3]
+        pts = pts + dado
+        pontos[3] = pts
+        print('Boom',pts)
+
+    if(pts > 10):
+        pts = 10
+    
+    plt.scatter(x[pts], y[pts], c=cor,s=50, marker="o")
+
+    
     
     plt.title('{a}ª jogada: {b} jogou o dado e sorteou: {c}'.format(a=cont, b=pers, c=dado))
     plt.savefig('{a}ª jogada'.format(a=cont))
 
-    test111 = fimDeJogo(x[dado], y[dado])
+    chegada = fimDeJogo(pts)
 
-    print ('dado:', x[dado], y[dado])
-    print('retorno da função fim de jogo:',test111)
-    print ('variavel chegada:', test111)
-    return test111
+    return chegada
     
 # Ordem das Jogadas
-def ordemDeJogada(personagem, cor):
+def ordemDeJogada(personagem, cor,pts):
     cont = 1
     game = True
     while game:
         for a,b in zip(personagem, cor):
-            chegada = jogada(a,b,cont)
+            chegada = jogada(a,b,pts,cont)
             if chegada == False:
                 cont+=1
             else:
                 print("Fim de Jogo") 
                 game = False 
-            
-    
+                return    
 
-ordemDeJogada(lista_de_personagens, lista_de_cores)
+ordemDeJogada(lista_de_personagens, lista_de_cores,lista_de_pontos)
