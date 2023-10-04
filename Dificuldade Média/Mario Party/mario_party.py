@@ -61,31 +61,27 @@ def jogada(pers, cor,pontos, cont):
         pts = pontos[0]
         pts = pts + dado
         pontos[0] = pts
-        print('mario',pts)
 
     if (pers=='Diddy Kong'):
         pts = pontos[1]
         pts = pts + dado
         pontos[1] = pts
-        print('Diddy',pts)
 
     if (pers=='Waluigi'):
         pts = pontos[2]
         pts = pts + dado
         pontos[2] = pts
-        print('Waluigi',pts)
 
     if (pers=='Boom Boom'):
         pts = pontos[3]
         pts = pts + dado
         pontos[3] = pts
-        print('Boom',pts)
 
     if(pts > 10):
         pts = 10
     
+    
     plt.scatter(x[pts], y[pts], c=cor,s=50, marker="o")
-
     
     
     plt.title('{a}ª jogada: {b} jogou o dado e sorteou: {c}'.format(a=cont, b=pers, c=dado))
